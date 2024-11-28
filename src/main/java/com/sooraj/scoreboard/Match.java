@@ -21,4 +21,9 @@ public class Match {
         this.homeScore = homeScore;
         this.awayScore = awayScore;
     }
+
+    public void finish() {
+        this.homeScore = -1;
+        this.awayScore = -1;
+    }
 }

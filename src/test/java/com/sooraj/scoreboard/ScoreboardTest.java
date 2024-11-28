@@ -32,4 +32,13 @@ class ScoreboardTest {
         assertThat(match.getHomeScore(), equalTo(0));
         assertThat(match.getAwayScore(), equalTo(1));
     }
+
+    @Test
+    void testFinishMatch(){
+        Match match = new Match();
+        match.start();
+        match.finish();
+        assertThat(match.getHomeScore(), equalTo(-1));
+        assertThat(match.getAwayScore(), equalTo(-1));
+    }
 }

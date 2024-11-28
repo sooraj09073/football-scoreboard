@@ -24,5 +24,12 @@ class ScoreboardTest {
         assertThat(match.getAwayScore(), equalTo(0));
     }
 
-
+    @Test
+    void testUpdateScore(){
+        Match match = new Match();
+        match.start();
+        match.updateScore(0,1);
+        assertThat(match.getHomeScore(), equalTo(0));
+        assertThat(match.getAwayScore(), equalTo(1));
+    }
 }

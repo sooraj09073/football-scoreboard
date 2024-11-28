@@ -5,10 +5,10 @@ public class Match {
     }
 
     public int getHomeScore() {
-        return 0;
+        return -1;
     }
 
     public int getAwayScore() {
-        return 0;
+        return -1;
     }
 }

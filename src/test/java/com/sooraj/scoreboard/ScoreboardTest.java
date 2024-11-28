@@ -6,11 +6,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 class ScoreboardTest {
+
     @Test
     void testScoresAreZeroWhenMatchStarts() {
         Match match = new Match();
         match.start();
-        assertThat(0, equalTo(match.getHomeScore()));
-        assertThat(0, equalTo(match.getAwayScore()));
+        assertThat(match.getHomeScore(), equalTo(0));
+        assertThat(match.getAwayScore(), equalTo(0));
     }
+
+
 }

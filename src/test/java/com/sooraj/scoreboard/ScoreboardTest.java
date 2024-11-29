@@ -48,7 +48,6 @@ class ScoreboardTest {
     void testAddTeam(){
         List<Team> teams = List.of(new Team());
         Match match = setMatch(teams);
-        match.getTeams();
         assertThat(match.getTeams(), equalTo(teams));
     }
 

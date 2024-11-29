@@ -3,6 +3,7 @@ package com.sooraj.scoreboard;
 import java.util.List;
 
 public class Match {
+    private List<Team> teams;
     private int homeScore = -1;
     private int awayScore = -1;
 
@@ -30,9 +31,10 @@ public class Match {
     }
 
     public List<Team> getTeams() {
-        return null;
+        return teams;
     }
 
     public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }

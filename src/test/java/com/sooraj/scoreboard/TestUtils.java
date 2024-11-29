@@ -1,5 +1,9 @@
 package com.sooraj.scoreboard;
 
+import com.sooraj.scoreboard.football.FootballMatch;
+import com.sooraj.scoreboard.football.FootballScoreBoard;
+import com.sooraj.scoreboard.football.FootballTeam;
+
 import java.util.List;
 
 public class TestUtils {

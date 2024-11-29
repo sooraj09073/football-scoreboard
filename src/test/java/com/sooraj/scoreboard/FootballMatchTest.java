@@ -1,5 +1,8 @@
 package com.sooraj.scoreboard;
 
+import com.sooraj.scoreboard.football.FootballMatch;
+import com.sooraj.scoreboard.football.FootballScoreBoard;
+import com.sooraj.scoreboard.football.FootballTeam;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,4 +1,8 @@
-package com.sooraj.scoreboard;
+package com.sooraj.scoreboard.football;
+
+import com.sooraj.scoreboard.Match;
+import com.sooraj.scoreboard.ScoreBoard;
+import com.sooraj.scoreboard.Team;
 
 import java.util.List;
 

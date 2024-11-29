@@ -1,7 +1,7 @@
 package com.sooraj.scoreboard;
 
 public abstract class Team {
-    private String name;
+    private final String name;
     protected Team(String teamName) {
         this.name = teamName;
     }

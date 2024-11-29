@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class Match {
     private List<Team> teams;
-    private ScoreBoard scoreBoard;
+    private final ScoreBoard scoreBoard;
     private int homeScore = -1;
     private int awayScore = -1;
 

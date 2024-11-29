@@ -4,10 +4,10 @@ import java.util.List;
 
 public class TestUtils {
     public static Match createFootBallMatch() {
-        FootBallTeam teamA = new FootBallTeam("TeamA");
-        FootBallTeam teamB = new FootBallTeam("TeamB");
+        FootballTeam teamA = new FootballTeam("TeamA");
+        FootballTeam teamB = new FootballTeam("TeamB");
         ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match match = new FootBallMatch(scoreBoard);
+        Match match = new FootballMatch(scoreBoard);
         match.register(List.of(teamA, teamB));
         return match;
     }

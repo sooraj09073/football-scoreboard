@@ -7,34 +7,34 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FootBallMatchTest {
+class FootballMatchTest {
 
     @Test
     void shouldRegisterTwoFootballTeamsForMatch(){
-        Team homeTeam = new FootBallTeam("Mexico");
-        Team awayTeam = new FootBallTeam("Canada");
+        Team homeTeam = new FootballTeam("Mexico");
+        Team awayTeam = new FootballTeam("Canada");
         ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootBallMatch(scoreBoard);
+        Match footBallMatch = new FootballMatch(scoreBoard);
         footBallMatch.register(List.of(homeTeam, awayTeam));
         assertThat(footBallMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
     }
 
     @Test
     void shouldNotRegisterThreeFootballTeamsForMatch(){
-        Team homeTeam = new FootBallTeam("Mexico");
-        Team awayTeam = new FootBallTeam("Canada");
-        Team thirdTeam = new FootBallTeam("France");
+        Team homeTeam = new FootballTeam("Mexico");
+        Team awayTeam = new FootballTeam("Canada");
+        Team thirdTeam = new FootballTeam("France");
         ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootBallMatch(scoreBoard);
+        Match footBallMatch = new FootballMatch(scoreBoard);
         List<Team> teams = List.of(homeTeam, awayTeam, thirdTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
 
     @Test
     void shouldNotRegisterSingleTeamForFootballMatch(){
-        Team homeTeam = new FootBallTeam("Mexico");
+        Team homeTeam = new FootballTeam("Mexico");
         ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootBallMatch(scoreBoard);
+        Match footBallMatch = new FootballMatch(scoreBoard);
         List<Team> teams = List.of(homeTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
@@ -42,7 +42,7 @@ class FootBallMatchTest {
     @Test
     void shouldNotRegisterEmptyTeamForFootballMatch(){
         ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootBallMatch(scoreBoard);
+        Match footBallMatch = new FootballMatch(scoreBoard);
         List<Team> teams = List.of();
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }

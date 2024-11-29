@@ -2,8 +2,8 @@ package com.sooraj.scoreboard;
 
 import java.util.List;
 
-public class FootBallMatch extends Match {
-    protected FootBallMatch(ScoreBoard scoreBoard) {
+public class FootballMatch extends Match {
+    protected FootballMatch(ScoreBoard scoreBoard) {
         super(scoreBoard);
     }
 

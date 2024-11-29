@@ -35,4 +35,11 @@ class FootBallMatchTest {
         List<Team> teams = List.of(homeTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
+
+    @Test
+    void shouldNotRegisterEmptyTeamForFootballMatch(){
+        Match footBallMatch = new FootBallMatch();
+        List<Team> teams = List.of();
+        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
+    }
 }

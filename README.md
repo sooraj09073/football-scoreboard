@@ -26,7 +26,8 @@ football-scoreboard/
     ├── src/ 
     │ ├── main/ 
     │ │ ├── java/ # Contains the Java source code
-    │ ├── test/   # Contains the test cases
+    │ ├── test/
+    │ │ ├── java/ # Contains the test cases
     ├── pom.xml # Maven configuration file 
     ├── README.md # Project documentation
 ```

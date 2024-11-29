@@ -17,4 +17,9 @@ public class FootballMatch extends Match {
             throw new IllegalArgumentException("A football match must have exactly 2 teams.");
         }
     }
+
+    @Override
+    public boolean isReadyToStart() {
+        return getTeams().size() == 2;
+    }
 }

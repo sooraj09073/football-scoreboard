@@ -3,50 +3,57 @@ package com.sooraj.scoreboard;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FootballMatchTest {
+
+    private ScoreBoard footballScoreBoard;
+    private Match footballMatch;
+
+    @BeforeEach
+    void setUp() {
+        footballScoreBoard = new FootballScoreBoard();
+        footballMatch = new FootballMatch(footballScoreBoard);
+    }
 
     @Test
     void shouldRegisterTwoFootballTeamsForMatch(){
         Team homeTeam = new FootballTeam("Mexico");
         Team awayTeam = new FootballTeam("Canada");
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootballMatch(scoreBoard);
-        footBallMatch.register(List.of(homeTeam, awayTeam));
-        assertThat(footBallMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
+
+        footballMatch.register(List.of(homeTeam, awayTeam));
+
+        assertThat("The registered teams should match the expected list",
+                footballMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
+        assertTrue(footballMatch.isReadyToStart(),
+                "The match should be ready to start after registering two teams");
     }
 
-    @Test
-    void shouldNotRegisterThreeFootballTeamsForMatch(){
-        Team homeTeam = new FootballTeam("Mexico");
-        Team awayTeam = new FootballTeam("Canada");
-        Team thirdTeam = new FootballTeam("France");
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootballMatch(scoreBoard);
-        List<Team> teams = List.of(homeTeam, awayTeam, thirdTeam);
-        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
+    @ParameterizedTest
+    @MethodSource(value = "invalidTeamCombinations")
+    void shouldNotRegisterInvalidFootballTeamsForMatch(List<Team> teams) {
+        assertThrows(IllegalArgumentException.class, () -> footballMatch.register(teams),
+                "Expected IllegalArgumentException when registering more than two teams");
     }
 
-    @Test
-    void shouldNotRegisterSingleTeamForFootballMatch(){
-        Team homeTeam = new FootballTeam("Mexico");
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootballMatch(scoreBoard);
-        List<Team> teams = List.of(homeTeam);
-        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
-    }
-
-    @Test
-    void shouldNotRegisterEmptyTeamForFootballMatch(){
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match footBallMatch = new FootballMatch(scoreBoard);
-        List<Team> teams = List.of();
-        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
+    static Stream<List<Team>> invalidTeamCombinations(){
+        return Stream.of(
+                List.of(),
+                List.of(new FootballTeam("Mexico")),
+                List.of(new FootballTeam("Mexico"),
+                        new FootballTeam("Canada"),
+                        new FootballTeam("France"))
+        );
     }
 }

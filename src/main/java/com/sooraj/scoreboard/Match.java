@@ -47,4 +47,6 @@ public abstract class Match {
 
     // Hook method for subclasses to enforce team constraints
     protected abstract void validateTeams(List<Team> teams);
+
+    public abstract boolean isReadyToStart();
 }

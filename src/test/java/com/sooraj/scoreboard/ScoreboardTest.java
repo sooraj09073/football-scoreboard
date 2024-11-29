@@ -12,7 +12,7 @@ class ScoreboardTest {
 
     @Test
     void testScoresAreInvalidBeforeMatchStarts() {
-        Match match = setMatch(List.of(new Team()));
+        Match match = setMatch(List.of(new Team("MyTeam")));
         assertThat(match.getHomeScore(), lessThan(0));
         assertThat(match.getAwayScore(), lessThan(0));
     }
@@ -20,7 +20,7 @@ class ScoreboardTest {
 
     @Test
     void testScoresAreZeroWhenMatchStarts() {
-        Match match = setMatch(List.of(new Team()));
+        Match match = setMatch(List.of(new Team("MyTeam")));
         match.start();
         assertThat(match.getHomeScore(), equalTo(0));
         assertThat(match.getAwayScore(), equalTo(0));
@@ -28,7 +28,7 @@ class ScoreboardTest {
 
     @Test
     void testUpdateScore(){
-        Match match = setMatch(List.of(new Team()));
+        Match match = setMatch(List.of(new Team("MyTeam")));
         match.start();
         match.updateScore(0,1);
         assertThat(match.getHomeScore(), equalTo(0));
@@ -37,7 +37,7 @@ class ScoreboardTest {
 
     @Test
     void testFinishMatch(){
-        Match match = setMatch(List.of(new Team()));
+        Match match = setMatch(List.of(new Team("MyTeam")));
         match.start();
         match.finish();
         assertThat(match.getHomeScore(), equalTo(-1));
@@ -46,9 +46,15 @@ class ScoreboardTest {
 
     @Test
     void testAddTeam(){
-        List<Team> teams = List.of(new Team());
+        List<Team> teams = List.of(new Team("MyTeam"));
         Match match = setMatch(teams);
         assertThat(match.getTeams(), equalTo(teams));
+    }
+
+    @Test
+    void testTeamName(){
+       Team myTeam = new Team("MyTeam");
+        assertThat(myTeam.getName(), equalTo("MyTeam"));
     }
 
     private Match setMatch(List<Team> teams) {

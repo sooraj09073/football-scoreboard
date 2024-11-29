@@ -1,5 +1,5 @@
 # Live Football World Cup Score Board
-A simple football scoreboard library developed in Java. This library tracks and display scores for football match. 
+A simple football scoreboard library developed in Java. This library tracks and display scores for football matches. 
 
 ## Features
 1. Add new football matches with participating team

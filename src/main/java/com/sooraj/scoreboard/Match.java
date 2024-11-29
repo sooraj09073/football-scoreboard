@@ -4,12 +4,18 @@ import java.util.List;
 
 public abstract class Match {
     private List<Team> teams;
+    private ScoreBoard scoreBoard;
     private int homeScore = -1;
     private int awayScore = -1;
+
+    protected Match(ScoreBoard scoreBoard){
+        this.scoreBoard = scoreBoard;
+    }
 
     public void start() {
         homeScore = 0;
         awayScore = 0;
+        scoreBoard.setScore(this);
     }
 
     public int getHomeScore() {

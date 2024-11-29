@@ -13,7 +13,8 @@ class FootBallMatchTest {
     void shouldRegisterTwoFootballTeamsForMatch(){
         Team homeTeam = new FootBallTeam("Mexico");
         Team awayTeam = new FootBallTeam("Canada");
-        Match footBallMatch = new FootBallMatch();
+        ScoreBoard scoreBoard = new FootballScoreBoard();
+        Match footBallMatch = new FootBallMatch(scoreBoard);
         footBallMatch.register(List.of(homeTeam, awayTeam));
         assertThat(footBallMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
     }
@@ -23,7 +24,8 @@ class FootBallMatchTest {
         Team homeTeam = new FootBallTeam("Mexico");
         Team awayTeam = new FootBallTeam("Canada");
         Team thirdTeam = new FootBallTeam("France");
-        Match footBallMatch = new FootBallMatch();
+        ScoreBoard scoreBoard = new FootballScoreBoard();
+        Match footBallMatch = new FootBallMatch(scoreBoard);
         List<Team> teams = List.of(homeTeam, awayTeam, thirdTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
@@ -31,14 +33,16 @@ class FootBallMatchTest {
     @Test
     void shouldNotRegisterSingleTeamForFootballMatch(){
         Team homeTeam = new FootBallTeam("Mexico");
-        Match footBallMatch = new FootBallMatch();
+        ScoreBoard scoreBoard = new FootballScoreBoard();
+        Match footBallMatch = new FootBallMatch(scoreBoard);
         List<Team> teams = List.of(homeTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
 
     @Test
     void shouldNotRegisterEmptyTeamForFootballMatch(){
-        Match footBallMatch = new FootBallMatch();
+        ScoreBoard scoreBoard = new FootballScoreBoard();
+        Match footBallMatch = new FootBallMatch(scoreBoard);
         List<Team> teams = List.of();
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }

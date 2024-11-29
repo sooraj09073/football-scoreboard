@@ -1,8 +1,8 @@
 package com.sooraj.scoreboard;
 
-public class Team {
+public abstract class Team {
     private String name;
-    public Team(String teamName) {
+    protected Team(String teamName) {
         this.name = teamName;
     }
 

@@ -37,4 +37,8 @@ public class Match {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+
+    public void register(Team homeTeam, Team awayTeam) {
+
+    }
 }

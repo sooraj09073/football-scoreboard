@@ -57,6 +57,15 @@ class ScoreboardTest {
         assertThat(myTeam.getName(), equalTo("MyTeam"));
     }
 
+    @Test
+    void testRegisterFootballTeam(){
+        Team homeTeam = new FootBallTeam("Mexico");
+        Team awayTeam = new FootBallTeam("Canada");
+        Match footBallMatch = new FootBallMatch();
+        footBallMatch.register(homeTeam, awayTeam);
+        assertThat(footBallMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
+    }
+
     private Match setMatch(List<Team> teams) {
         Match match = new Match();
         match.setTeams(teams);

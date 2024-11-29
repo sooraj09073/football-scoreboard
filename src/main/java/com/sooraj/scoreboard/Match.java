@@ -1,5 +1,7 @@
 package com.sooraj.scoreboard;
 
+import java.util.List;
+
 public class Match {
     private int homeScore = -1;
     private int awayScore = -1;
@@ -25,5 +27,12 @@ public class Match {
     public void finish() {
         this.homeScore = -1;
         this.awayScore = -1;
+    }
+
+    public List<Team> getTeams() {
+        return null;
+    }
+
+    public void setTeams(List<Team> teams) {
     }
 }

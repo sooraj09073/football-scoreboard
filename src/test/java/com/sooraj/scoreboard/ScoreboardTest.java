@@ -10,7 +10,7 @@ class ScoreboardTest {
 
     @Test
     void testScoresAreInvalidBeforeMatchStarts() {
-        Match match = new Match();
+        Match match = setMatch();
         assertThat(match.getHomeScore(), lessThan(0));
         assertThat(match.getAwayScore(), lessThan(0));
     }
@@ -18,7 +18,7 @@ class ScoreboardTest {
 
     @Test
     void testScoresAreZeroWhenMatchStarts() {
-        Match match = new Match();
+        Match match = setMatch();
         match.start();
         assertThat(match.getHomeScore(), equalTo(0));
         assertThat(match.getAwayScore(), equalTo(0));
@@ -26,7 +26,7 @@ class ScoreboardTest {
 
     @Test
     void testUpdateScore(){
-        Match match = new Match();
+        Match match = setMatch();
         match.start();
         match.updateScore(0,1);
         assertThat(match.getHomeScore(), equalTo(0));
@@ -35,10 +35,14 @@ class ScoreboardTest {
 
     @Test
     void testFinishMatch(){
-        Match match = new Match();
+        Match match = setMatch();
         match.start();
         match.finish();
         assertThat(match.getHomeScore(), equalTo(-1));
         assertThat(match.getAwayScore(), equalTo(-1));
+    }
+
+    private Match setMatch(){
+        return new Match();
     }
 }

@@ -27,4 +27,12 @@ class FootBallMatchTest {
         List<Team> teams = List.of(homeTeam, awayTeam, thirdTeam);
         assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
+
+    @Test
+    void shouldNotRegisterSingleTeamForFootballMatch(){
+        Team homeTeam = new FootBallTeam("Mexico");
+        Match footBallMatch = new FootBallMatch();
+        List<Team> teams = List.of(homeTeam);
+        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
+    }
 }

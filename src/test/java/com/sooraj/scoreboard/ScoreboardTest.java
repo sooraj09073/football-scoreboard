@@ -67,8 +67,8 @@ class ScoreboardTest {
     }
 
     private Match setMatch(List<Team> teams) {
-        Match match = new Match();
-        match.setTeams(teams);
+        Match match = new FootBallMatch();
+        match.register(teams);
         return match;
     }
 }

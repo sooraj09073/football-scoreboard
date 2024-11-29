@@ -2,7 +2,7 @@ package com.sooraj.scoreboard;
 
 import java.util.List;
 
-public class Match {
+public abstract class Match {
     private List<Team> teams;
     private int homeScore = -1;
     private int awayScore = -1;
@@ -34,11 +34,9 @@ public class Match {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public final void register(List<Team> teams) {
         this.teams = teams;
     }
 
-    public void register(Team homeTeam, Team awayTeam) {
-
-    }
+    public abstract void register(Team homeTeam, Team awayTeam);
 }

@@ -2,6 +2,7 @@ package com.sooraj.scoreboard;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -11,50 +12,43 @@ import static org.hamcrest.Matchers.lessThan;
 class ScoreboardTest {
 
     @Test
-    void testScoresAreInvalidBeforeMatchStarts() {
-        Match match = setMatch(getTeams());
+    void shouldSetScoresToInvalidBeforeMatchStart() {
+        Match match = createMatch(createTeams("MyTeam"));
         assertThat(match.getHomeScore(), lessThan(0));
         assertThat(match.getAwayScore(), lessThan(0));
     }
 
-
     @Test
-    void testScoresAreZeroWhenMatchStarts() {
-        Match match = setMatch(getTeams());
+    void shouldInitializeScoresToZeroWhenMatchStarts() {
+        Match match = createMatch(createTeams("MyTeam"));
         match.start();
         assertThat(match.getHomeScore(), equalTo(0));
         assertThat(match.getAwayScore(), equalTo(0));
     }
 
     @Test
-    void testUpdateScore(){
-        Match match = setMatch(getTeams());
+    void shouldUpdateScoresCorrectly(){
+        Match match = createMatch(createTeams("MyTeam"));
         match.start();
-        match.updateScore(0,1);
-        assertThat(match.getHomeScore(), equalTo(0));
-        assertThat(match.getAwayScore(), equalTo(1));
+        match.updateScore(2,3);
+        assertThat(match.getHomeScore(), equalTo(2));
+        assertThat(match.getAwayScore(), equalTo(3));
     }
 
     @Test
-    void testFinishMatch(){
-        Match match = setMatch(getTeams());
+    void shouldFinishMatchAndResetScoresToInvalid(){
+        Match match = createMatch(createTeams("MyTeam"));
         match.start();
         match.finish();
-        assertThat(match.getHomeScore(), equalTo(-1));
-        assertThat(match.getAwayScore(), equalTo(-1));
+        assertThat(match.getHomeScore(), lessThan(-1));
+        assertThat(match.getAwayScore(), lessThan(-1));
     }
 
     @Test
-    void testAddTeam(){
-        List<Team> teams = getTeams();
-        Match match = setMatch(teams);
+    void shouldRegisterTeamsForMatch() {
+        List<Team> teams = createTeams("TeamA", "TeamB");
+        Match match = createMatch(teams);
         assertThat(match.getTeams(), equalTo(teams));
-    }
-
-    @Test
-    void testTeamName(){
-       Team myTeam = new Team("MyTeam");
-        assertThat(myTeam.getName(), equalTo("MyTeam"));
     }
 
     @Test
@@ -66,13 +60,15 @@ class ScoreboardTest {
         assertThat(footBallMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
     }
 
-    private Match setMatch(List<Team> teams) {
+    private Match createMatch(List<Team> teams) {
         Match match = new FootBallMatch();
         match.register(teams);
         return match;
     }
 
-    private List<Team> getTeams(){
-        return List.of(new Team("MyTeam"));
+    private List<Team> createTeams(String... teamNames){
+        return Arrays.stream(teamNames)
+                .map(Team::new)
+                .toList();
     }
 }

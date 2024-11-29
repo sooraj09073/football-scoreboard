@@ -7,7 +7,7 @@ import com.sooraj.scoreboard.Team;
 import java.util.List;
 
 public class FootballMatch extends Match {
-    protected FootballMatch(ScoreBoard scoreBoard) {
+    public FootballMatch(ScoreBoard scoreBoard) {
         super(scoreBoard);
     }
 

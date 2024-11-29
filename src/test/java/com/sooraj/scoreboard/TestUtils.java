@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestUtils {
-    public static Match createMatch(List<Team> teams) {
+    public static Match createFootBallMatch() {
+        FootBallTeam teamA = new FootBallTeam("TeamA");
+        FootBallTeam teamB = new FootBallTeam("TeamB");
         Match match = new FootBallMatch();
-        match.register(teams);
+        match.register(List.of(teamA, teamB));
         return match;
     }
 

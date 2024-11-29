@@ -35,8 +35,10 @@ public abstract class Match {
     }
 
     public final void register(List<Team> teams) {
+        validateTeams(teams);
         this.teams = teams;
     }
 
-    public abstract void register(Team homeTeam, Team awayTeam);
+    // Hook method for subclasses to enforce team constraints
+    protected abstract void validateTeams(List<Team> teams);
 }

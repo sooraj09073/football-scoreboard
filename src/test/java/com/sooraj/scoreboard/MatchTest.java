@@ -24,7 +24,7 @@ class MatchTest {
         Team awayTeam = new FootBallTeam("Canada");
         Team thirdTeam = new FootBallTeam("France");
         Match footBallMatch = new FootBallMatch();
-        footBallMatch.register(List.of(homeTeam, awayTeam, thirdTeam));
-        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(List.of(homeTeam, awayTeam, thirdTeam)));
+        List<Team> teams = List.of(homeTeam, awayTeam, thirdTeam);
+        assertThrows(IllegalArgumentException.class, () -> footBallMatch.register(teams));
     }
 }

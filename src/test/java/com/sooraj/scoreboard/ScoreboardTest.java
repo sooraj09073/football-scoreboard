@@ -2,9 +2,6 @@ package com.sooraj.scoreboard;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static com.sooraj.scoreboard.TestUtils.createMatch;
 import static com.sooraj.scoreboard.TestUtils.createTeams;
 import static org.hamcrest.MatcherAssert.assertThat;

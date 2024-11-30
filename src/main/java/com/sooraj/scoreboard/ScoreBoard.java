@@ -47,4 +47,8 @@ public abstract class ScoreBoard {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Live match not found with the specified team names"));
     }
+
+    public String getSummary() {
+        return "";
+    }
 }

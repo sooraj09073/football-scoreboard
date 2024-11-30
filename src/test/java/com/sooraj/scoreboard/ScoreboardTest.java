@@ -20,8 +20,8 @@ class ScoreboardTest {
 
     @BeforeEach
     void setUp() {
-        FootballTeam teamA = new FootballTeam("TeamA");
-        FootballTeam teamB = new FootballTeam("TeamB");
+        FootballTeam teamA = new FootballTeam("Mexico");
+        FootballTeam teamB = new FootballTeam("Canada");
         scoreBoard = new FootballScoreBoard();
         match = new FootballMatch(scoreBoard);
         match.register(List.of(teamA, teamB));
@@ -48,7 +48,7 @@ class ScoreboardTest {
         match.start();
         // Update scores and validate
         match.updateScore(2,3);
-        Match myLiveMatch = scoreBoard.findLiveMatch("TeamA","TeamB");
+        Match myLiveMatch = scoreBoard.findLiveMatch("Mexico","Canada");
         assertThat(myLiveMatch.getHomeScore(), equalTo(2));
         assertThat(myLiveMatch.getAwayScore(), equalTo(3));
     }
@@ -63,14 +63,59 @@ class ScoreboardTest {
     @Test
     void shouldShowLiveMatchInScoreboard(){
         match.start();
-        assertThat("Expected live match to be displayed in the scoreboard", scoreBoard.isMatchLive("TeamA", "TeamB"));
+        assertThat("Expected live match to be displayed in the scoreboard", scoreBoard.isMatchLive("Mexico", "Canada"));
     }
 
     @Test
     void shouldRemoveMatchFromScoreBoardWhenMatchEnds(){
         match.start();
         match.finish();
-        boolean matchExist = scoreBoard.isMatchLive("TeamA", "TeamB");
+        boolean matchExist = scoreBoard.isMatchLive("Mexico", "Canada");
         assertThat(matchExist, equalTo(false));
+    }
+
+    @Test
+    void testScoreSummary(){
+        match.start();
+        match.updateScore(0,5);
+
+        FootballTeam spain = new FootballTeam("Spain");
+        FootballTeam brazil = new FootballTeam("Brazil");
+        Match match2 = new FootballMatch(scoreBoard);
+        match2.register(List.of(spain, brazil));
+        match2.start();
+        match2.updateScore(10,2);
+
+        FootballTeam germany = new FootballTeam("Germany");
+        FootballTeam france = new FootballTeam("France");
+        Match match3 = new FootballMatch(scoreBoard);
+        match3.register(List.of(germany, france));
+        match3.start();
+        match3.updateScore(2,2);
+
+        FootballTeam uruguay = new FootballTeam("Uruguay");
+        FootballTeam italy = new FootballTeam("Italy");
+        Match match4 = new FootballMatch(scoreBoard);
+        match4.register(List.of(uruguay, italy));
+        match4.start();
+        match4.updateScore(6,6);
+
+        FootballTeam argentina = new FootballTeam("Argentina");
+        FootballTeam australia = new FootballTeam("Australia");
+        Match match5 = new FootballMatch(scoreBoard);
+        match5.register(List.of(argentina, australia));
+        match5.start();
+        match5.updateScore(3,1);
+
+        String summary = scoreBoard.getSummary();
+
+        assertThat(summary, equalTo("""
+                1. Uruguay 6 - Italy 6
+                2. Spain 10 - Brazil 2
+                3. Mexico 0 - Canada 5
+                4. Argentina 3 - Australia 1
+                5. Germany 2 - France 2
+                """
+                ));
     }
 }

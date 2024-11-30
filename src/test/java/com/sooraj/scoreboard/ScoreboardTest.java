@@ -11,6 +11,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ScoreboardTest {
 
@@ -50,6 +51,13 @@ class ScoreboardTest {
         Match myLiveMatch = scoreBoard.findLiveMatch("TeamA","TeamB");
         assertThat(myLiveMatch.getHomeScore(), equalTo(2));
         assertThat(myLiveMatch.getAwayScore(), equalTo(3));
+    }
+
+    @Test
+    void shouldNotUpdateInvalidScoresToScoreBoard(){
+        match.start();
+        assertThrows(RuntimeException.class, () -> match.updateScore(-1,-1),
+                "Expected RuntimeException when invalid scores are updated.");
     }
 
     @Test

@@ -13,6 +13,10 @@ public abstract class Match {
     }
 
     public void start() {
+        if(!isReadyToStart()){
+            throw new IllegalStateException("Cannot start the match: Teams registration is not complete.");
+        }
+
         homeScore = 0;
         awayScore = 0;
         scoreBoard.setScore(this);

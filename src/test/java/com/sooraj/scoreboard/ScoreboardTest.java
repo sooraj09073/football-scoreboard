@@ -19,8 +19,8 @@ class ScoreboardTest {
 
     @BeforeEach
     void setUp() {
-        FootballTeam teamA = new FootballTeam("TeamA");
-        FootballTeam teamB = new FootballTeam("TeamB");
+        FootballTeam teamA = new FootballTeam("TeamA", MatchSide.HOME_SIDE);
+        FootballTeam teamB = new FootballTeam("TeamB", MatchSide.AWAY_SIDE);
         scoreBoard = new FootballScoreBoard();
         match = new FootballMatch(scoreBoard);
         match.register(List.of(teamA, teamB));
@@ -70,5 +70,13 @@ class ScoreboardTest {
                             && teams.get(1).getName().equals("TeamB");
                 }).toList();
         assertThat(currentMatch.size(), equalTo(1));
+    }
+
+    @Test
+    void shouldRemoveMatchFromScoreBoardWhenMatchEnds(){
+        match.start();
+        match.finish();
+        boolean matchExist = scoreBoard.isMatchLive("TeamA", "TeamB");
+        assertThat(matchExist, equalTo(false));
     }
 }

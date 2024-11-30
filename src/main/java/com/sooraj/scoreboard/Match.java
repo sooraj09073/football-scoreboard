@@ -72,4 +72,12 @@ public abstract class Match {
     protected boolean isReadyToStart() {
         return teams != null && teams.size() == 2;
     }
+
+    public Team getAwayTeam() {
+        return null;
+    }
+
+    public Team getHomeTeam() {
+        return null;
+    }
 }

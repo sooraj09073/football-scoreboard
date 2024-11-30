@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.sooraj.scoreboard.TestUtils.createFootBallMatch;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
@@ -63,5 +62,14 @@ class ScoreboardTest {
                             && teams.get(1).getName().equals("TeamB");
                 }).toList();
         assertThat(currentMatch.size(), equalTo(1));
+    }
+
+    public static Match createFootBallMatch() {
+        FootballTeam teamA = new FootballTeam("TeamA");
+        FootballTeam teamB = new FootballTeam("TeamB");
+        ScoreBoard scoreBoard = new FootballScoreBoard();
+        Match match = new FootballMatch(scoreBoard);
+        match.register(List.of(teamA, teamB));
+        return match;
     }
 }

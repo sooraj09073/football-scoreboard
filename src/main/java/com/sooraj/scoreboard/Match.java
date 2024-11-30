@@ -5,18 +5,24 @@ import java.util.List;
 public abstract class Match {
     private List<Team> teams;
     private final ScoreBoard scoreBoard;
+    private final TeamValidator teamValidator;
+    private final TeamRegistration teamRegistration;
+    private final Scoring scoring;
     private int homeScore = -1;
     private int awayScore = -1;
 
-    protected Match(ScoreBoard scoreBoard){
+    protected Match(ScoreBoard scoreBoard, TeamValidator teamValidator,
+                    TeamRegistration teamRegistration, Scoring scoring) {
         this.scoreBoard = scoreBoard;
+        this.teamValidator = teamValidator;
+        this.teamRegistration = teamRegistration;
+        this.scoring = scoring;
     }
 
     public void start() {
-        if(!isReadyToStart()){
+        if (!isReadyToStart()) {
             throw new IllegalStateException("Cannot start the match: Teams registration is not complete.");
         }
-
         homeScore = 0;
         awayScore = 0;
         scoreBoard.setScore(this);
@@ -30,9 +36,20 @@ public abstract class Match {
         return awayScore;
     }
 
-    public void updateScore(int homeScore, int awayScore) {
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public void setHomeScore(int homeScore) {
         this.homeScore = homeScore;
+    }
+
+    public void setAwayScore(int awayScore) {
         this.awayScore = awayScore;
+    }
+
+    public void updateScore(int homeScore, int awayScore) {
+        scoring.updateScore(this, homeScore, awayScore);
     }
 
     public void finish() {
@@ -45,12 +62,14 @@ public abstract class Match {
     }
 
     public final void register(List<Team> teams) {
-        validateTeams(teams);
-        this.teams = teams;
+        teamRegistration.register(this, teams);
     }
 
-    // Hook method for subclasses to enforce team constraints
-    protected abstract void validateTeams(List<Team> teams);
+    protected void validateTeams(List<Team> teams) {
+        teamValidator.validateTeams(teams);
+    }
 
-    public abstract boolean isReadyToStart();
+    protected boolean isReadyToStart() {
+        return teams != null && teams.size() == 2;
+    }
 }

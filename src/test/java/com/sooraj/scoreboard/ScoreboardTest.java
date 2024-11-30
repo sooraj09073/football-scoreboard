@@ -56,8 +56,8 @@ class ScoreboardTest {
     @Test
     void shouldNotUpdateInvalidScoresToScoreBoard(){
         match.start();
-        assertThrows(RuntimeException.class, () -> match.updateScore(-1,-1),
-                "Expected RuntimeException when invalid scores are updated.");
+        assertThrows(IllegalArgumentException.class, () -> match.updateScore(-1,-1),
+                "Expected IllegalArgumentException when invalid scores are updated.");
     }
 
     @Test

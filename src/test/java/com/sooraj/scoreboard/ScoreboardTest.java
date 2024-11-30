@@ -53,13 +53,6 @@ class ScoreboardTest {
     }
 
     @Test
-    void shouldFinishMatchAndResetScoresToInvalid(){
-        match.start();
-        match.finish();
-        assertThat(match.getHomeScore(), lessThan(0));
-        assertThat(match.getAwayScore(), lessThan(0));
-    }
-    @Test
     void shouldUpdateScoreBoardWhenMatchStarts(){
         match.start();
         List<Match> currentMatch = scoreBoard

@@ -1,6 +1,10 @@
 package com.sooraj.scoreboard;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.*;
 
 public abstract class Match {
     private List<Team> teams;
@@ -25,7 +29,7 @@ public abstract class Match {
         }
         homeScore = 0;
         awayScore = 0;
-        scoreBoard.setScore(this);
+        scoreBoard.addMatch(this);
     }
 
     public int getHomeScore() {
@@ -57,7 +61,7 @@ public abstract class Match {
     }
 
     public List<Team> getTeams() {
-        return teams;
+        return unmodifiableList(teams);
     }
 
     public final void register(List<Team> teams) {

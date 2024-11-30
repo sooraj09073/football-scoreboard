@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.*;
 public abstract class ScoreBoard {
     private final List<Match> matchList = new ArrayList<>();
 
-    public void setScore(Match matchList) {
+    public void addMatch(Match matchList) {
         this.matchList.add(matchList);
     }
 

@@ -43,12 +43,13 @@ class ScoreboardTest {
     }
 
     @Test
-    void shouldUpdateScoresCorrectly(){
+    void shouldUpdateScoresCorrectlyToScoreBoard(){
         match.start();
         // Update scores and validate
         match.updateScore(2,3);
-        assertThat(match.getHomeScore(), equalTo(2));
-        assertThat(match.getAwayScore(), equalTo(3));
+        Match myLiveMatch = scoreBoard.findLiveMatch("TeamA","TeamB");
+        assertThat(myLiveMatch.getHomeScore(), equalTo(2));
+        assertThat(myLiveMatch.getAwayScore(), equalTo(3));
     }
 
     @Test

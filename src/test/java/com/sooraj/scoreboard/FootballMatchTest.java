@@ -47,6 +47,12 @@ class FootballMatchTest {
                 "Expected IllegalArgumentException when registering more than two teams");
     }
 
+    @Test
+    void shouldThrowExceptionWhenStartingMatchWithoutTeams() {
+        assertThrows(IllegalStateException.class, () -> footballMatch.start(),
+                "Expected IllegalStateException when starting without registering 2 teams");
+    }
+
     static Stream<List<Team>> invalidTeamCombinations(){
         return Stream.of(
                 List.of(),

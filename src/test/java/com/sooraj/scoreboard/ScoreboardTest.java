@@ -61,17 +61,9 @@ class ScoreboardTest {
     }
 
     @Test
-    void shouldUpdateScoreBoardWhenMatchStarts(){
+    void shouldShowLiveMatchInScoreboard(){
         match.start();
-        List<Match> currentMatch = scoreBoard
-                .getMatchList()
-                .stream()
-                .filter(liveMatch-> {
-                    List<Team> teams = liveMatch.getTeams();
-                    return teams.get(0).getName().equals("TeamA")
-                            && teams.get(1).getName().equals("TeamB");
-                }).toList();
-        assertThat(currentMatch.size(), equalTo(1));
+        assertThat("Expected live match to be displayed in the scoreboard", scoreBoard.isMatchLive("TeamA", "TeamB"));
     }
 
     @Test

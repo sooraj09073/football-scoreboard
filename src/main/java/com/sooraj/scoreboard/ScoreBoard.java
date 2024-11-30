@@ -46,7 +46,7 @@ public abstract class ScoreBoard {
                     return matchTeamNames.equals(testTeamSet);
                 })
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Live match not found with the specified team names"));
+                .orElseThrow(() -> new LiveMatchNotFoundException("Live match not found with the specified team names"));
     }
 
     public String getSummary() {

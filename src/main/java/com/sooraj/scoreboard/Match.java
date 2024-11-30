@@ -55,6 +55,7 @@ public abstract class Match {
     public void finish() {
         this.homeScore = -1;
         this.awayScore = -1;
+        scoreBoard.removeMatch(this);
     }
 
     public List<Team> getTeams() {
@@ -71,13 +72,5 @@ public abstract class Match {
 
     protected boolean isReadyToStart() {
         return teams != null && teams.size() == 2;
-    }
-
-    public Team getAwayTeam() {
-        return null;
-    }
-
-    public Team getHomeTeam() {
-        return null;
     }
 }

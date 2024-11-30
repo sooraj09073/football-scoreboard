@@ -19,8 +19,8 @@ class ScoreboardTest {
 
     @BeforeEach
     void setUp() {
-        FootballTeam teamA = new FootballTeam("TeamA", MatchSide.HOME_SIDE);
-        FootballTeam teamB = new FootballTeam("TeamB", MatchSide.AWAY_SIDE);
+        FootballTeam teamA = new FootballTeam("TeamA");
+        FootballTeam teamB = new FootballTeam("TeamB");
         scoreBoard = new FootballScoreBoard();
         match = new FootballMatch(scoreBoard);
         match.register(List.of(teamA, teamB));

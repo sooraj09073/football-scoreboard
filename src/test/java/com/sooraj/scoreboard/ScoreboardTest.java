@@ -3,6 +3,7 @@ package com.sooraj.scoreboard;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,25 +14,38 @@ import static org.hamcrest.Matchers.lessThan;
 
 class ScoreboardTest {
 
-    @Test
-    void shouldSetScoresToInvalidBeforeFootballMatchStart() {
-        Match match = createFootBallMatch();
-        assertThat(match.getHomeScore(), lessThan(0));
-        assertThat(match.getAwayScore(), lessThan(0));
+    Match match;
+    ScoreBoard scoreBoard;
+
+    @BeforeEach
+    void setUp() {
+        FootballTeam teamA = new FootballTeam("TeamA");
+        FootballTeam teamB = new FootballTeam("TeamB");
+        scoreBoard = new FootballScoreBoard();
+        match = new FootballMatch(scoreBoard);
+        match.register(List.of(teamA, teamB));
     }
 
     @Test
-    void shouldInitializeScoresToZeroWhenFootballMatchStarts() {
-        Match match = createFootBallMatch();
+    void shouldInitializeScoresCorrectly() {
+        // Before match starts, scores should be invalid
+        assertThat("Home score should be invalid before the match starts",
+                match.getHomeScore(), lessThan(0));
+        assertThat("Away score should be invalid before the match starts",
+                match.getAwayScore(), lessThan(0));
+
+        // After match starts, scores should be initialized to zero
         match.start();
-        assertThat(match.getHomeScore(), equalTo(0));
-        assertThat(match.getAwayScore(), equalTo(0));
+        assertThat("Home score should be initialized to 0 when match starts",
+                match.getHomeScore(), equalTo(0));
+        assertThat("Away score should be initialized to 0 when match starts",
+                match.getAwayScore(), equalTo(0));
     }
 
     @Test
     void shouldUpdateScoresCorrectly(){
-        Match match = createFootBallMatch();
         match.start();
+        // Update scores and validate
         match.updateScore(2,3);
         assertThat(match.getHomeScore(), equalTo(2));
         assertThat(match.getAwayScore(), equalTo(3));
@@ -39,7 +53,6 @@ class ScoreboardTest {
 
     @Test
     void shouldFinishMatchAndResetScoresToInvalid(){
-        Match match = createFootBallMatch();
         match.start();
         match.finish();
         assertThat(match.getHomeScore(), lessThan(0));
@@ -47,11 +60,6 @@ class ScoreboardTest {
     }
     @Test
     void shouldUpdateScoreBoardWhenMatchStarts(){
-        FootballTeam teamA = new FootballTeam("TeamA");
-        FootballTeam teamB = new FootballTeam("TeamB");
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match match = new FootballMatch(scoreBoard);
-        match.register(List.of(teamA, teamB));
         match.start();
         List<Match> currentMatch = scoreBoard
                 .getMatchList()
@@ -62,14 +70,5 @@ class ScoreboardTest {
                             && teams.get(1).getName().equals("TeamB");
                 }).toList();
         assertThat(currentMatch.size(), equalTo(1));
-    }
-
-    public static Match createFootBallMatch() {
-        FootballTeam teamA = new FootballTeam("TeamA");
-        FootballTeam teamB = new FootballTeam("TeamB");
-        ScoreBoard scoreBoard = new FootballScoreBoard();
-        Match match = new FootballMatch(scoreBoard);
-        match.register(List.of(teamA, teamB));
-        return match;
     }
 }

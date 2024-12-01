@@ -126,6 +126,8 @@ class ScoreboardTest {
         FootballTeamRegistration teamRegistration = new FootballTeamRegistration();
         teamRegistration.register(List.of(homeTeam, awayTeam));
 
+        scoreUpdater = new MatchScore();
+        footballMatchManager = new FootballMatchManager(scoreBoard, scoreUpdater);
         return new FootballMatch(teamRegistration, footballMatchManager);
     }
 

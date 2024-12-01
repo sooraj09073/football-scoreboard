@@ -1,8 +1,8 @@
 package com.sooraj.scoreboard.domain;
 
-import com.sooraj.scoreboard.ScoreBoard;
+import com.sooraj.scoreboard.service.ScoreBoard;
 import com.sooraj.scoreboard.Scoring;
-import com.sooraj.scoreboard.TeamRegistration;
+import com.sooraj.scoreboard.service.TeamRegistration;
 import com.sooraj.scoreboard.validator.TeamValidator;
 
 import java.util.List;

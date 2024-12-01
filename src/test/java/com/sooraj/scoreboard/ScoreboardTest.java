@@ -4,6 +4,7 @@ import com.sooraj.scoreboard.domain.Match;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.domain.FootballTeam;
+import com.sooraj.scoreboard.service.ScoreBoard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

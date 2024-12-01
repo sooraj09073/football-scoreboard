@@ -1,6 +1,7 @@
 package com.sooraj.scoreboard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,18 +16,16 @@ public abstract class ScoreBoard {
     }
 
     public List<Match> getMatchList() {
-        return matchList;
+        return Collections.unmodifiableList(matchList);
     }
 
     public boolean isMatchLive(String... teams) {
        Set<String> testTeamSet = Stream.of(teams).collect(toSet());
         return matchList.stream()
-                .anyMatch(match -> {
-                    Set<String> teamSet = match.getTeams()
-                            .stream()
-                            .map(Team::getName).collect(toSet());
-                    return teamSet.equals(testTeamSet);
-                });
+                .anyMatch(match ->match.getTeams()
+                        .stream()
+                        .map(Team::getName).collect(toSet())
+                        .equals(testTeamSet));
     }
 
     public void removeMatch(Match match) {
@@ -35,14 +34,12 @@ public abstract class ScoreBoard {
 
     public Match findLiveMatch(String... teams) {
         Set<String> testTeamSet = Stream.of(teams).collect(toSet());
+
         return matchList.stream()
-                .filter(match -> {
-                    Set<String> matchTeamNames = match.getTeams().stream()
-                            .map(Team::getName)
-                            .collect(toSet());
-                    // Check if the team names match exactly
-                    return matchTeamNames.equals(testTeamSet);
-                })
+                .filter(match -> match.getTeams().stream()
+                        .map(Team::getName)
+                        .collect(toSet())
+                        .equals(testTeamSet))
                 .findFirst()
                 .orElseThrow(() -> new LiveMatchNotFoundException("Live match not found with the specified team names"));
     }

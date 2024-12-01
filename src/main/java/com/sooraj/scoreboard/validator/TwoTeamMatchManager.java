@@ -1,14 +1,15 @@
 package com.sooraj.scoreboard.validator;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.domain.ScoreUpdater;
 import com.sooraj.scoreboard.domain.Team;
 import com.sooraj.scoreboard.exception.MatchStateException;
 import com.sooraj.scoreboard.service.ScoreBoard;
 
 public class TwoTeamMatchManager extends MatchManager{
 
-    protected TwoTeamMatchManager(ScoreBoard scoreBoard) {
-        super(scoreBoard);
+    protected TwoTeamMatchManager(ScoreBoard scoreBoard, ScoreUpdater scoreUpdater) {
+        super(scoreBoard, scoreUpdater);
     }
 
     @Override

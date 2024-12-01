@@ -1,14 +1,17 @@
 package com.sooraj.scoreboard.validator;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.domain.ScoreUpdater;
 import com.sooraj.scoreboard.exception.MatchStateException;
 import com.sooraj.scoreboard.service.ScoreBoard;
 
 public abstract class MatchManager implements MatchRegulator {
     private final ScoreBoard scoreBoard;
+    private final ScoreUpdater scoreUpdater;
 
-    protected MatchManager(ScoreBoard scoreBoard) {
+    protected MatchManager(ScoreBoard scoreBoard, ScoreUpdater scoreUpdater) {
         this.scoreBoard = scoreBoard;
+        this.scoreUpdater = scoreUpdater;
     }
 
     @Override
@@ -16,9 +19,9 @@ public abstract class MatchManager implements MatchRegulator {
         if(!canStart(match)){
             throw new MatchStateException("Match cannot be started");
         }
-        match.setHomeScore(0);
-        match.setAwayScore(0);
-        scoreBoard.addMatch(match);
+        scoreUpdater.setHomeScore(0);
+        scoreUpdater.setAwayScore(0);
+        scoreBoard.addMatch(match,scoreUpdater);
         match.hasStarted(true);
     }
 
@@ -32,7 +35,7 @@ public abstract class MatchManager implements MatchRegulator {
             if(homeScore<0 || awayScore<0) {
                 throw new IllegalArgumentException("Invalid score");
             }
-            match.setHomeScore(homeScore);
-            match.setAwayScore(awayScore);
+        scoreUpdater.setHomeScore(homeScore);
+        scoreUpdater.setAwayScore(awayScore);
     }
 }

@@ -65,6 +65,14 @@ class FootballMatchTest {
                 "Expected MatchStateException when starting match which is already in progress");
     }
 
+    @Test
+    void shouldThrowExceptionWhenTeamsAreNotReadyToStart() {
+        List <Team> teams = registerTwoTeamForMatch();
+        teams.forEach(team -> team.setReady(false));
+        assertThrows(MatchStateException.class, () -> footballMatch.start(),
+                "Expected MatchStateException when starting match where teams are not ready");
+    }
+
     static Stream<List<Team>> invalidTeamCombinations(){
         return Stream.of(
                 List.of(),

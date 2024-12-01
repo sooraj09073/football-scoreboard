@@ -1,10 +1,10 @@
-package com.sooraj.scoreboard.validator;
+package com.sooraj.scoreboard.service;
 
 import com.sooraj.scoreboard.domain.Team;
 
 import java.util.List;
 
-public class FootballTeamValidator implements TeamValidator {
+public class FootballTeamRegistration extends TeamRegistration {
     @Override
     public void validateTeams(List<Team> teams) {
         if (teams == null || teams.size() != 2) {

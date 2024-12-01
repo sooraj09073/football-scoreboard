@@ -2,7 +2,6 @@ package com.sooraj.scoreboard.domain;
 
 import com.sooraj.scoreboard.service.TeamRegistration;
 import com.sooraj.scoreboard.validator.MatchRegulator;
-import com.sooraj.scoreboard.validator.TeamValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,16 +11,13 @@ import static java.util.Collections.*;
 
 public abstract class Match {
     private List<Team> teams;
-    private final TeamValidator teamValidator;
     private final TeamRegistration teamRegistration;
     private final MatchRegulator matchRegulator;
     private int homeScore = -1;
     private int awayScore = -1;
     private boolean hasStarted = false;
 
-    protected Match(TeamValidator teamValidator,
-                    TeamRegistration teamRegistration, MatchRegulator matchRegulator) {
-        this.teamValidator = teamValidator;
+    protected Match(TeamRegistration teamRegistration, MatchRegulator matchRegulator) {
         this.teamRegistration = teamRegistration;
         this.matchRegulator = matchRegulator;
     }
@@ -74,10 +70,6 @@ public abstract class Match {
 
     public final void register(List<Team> teams) {
         teamRegistration.register(this, teams);
-    }
-
-    public void validateTeams(List<Team> teams) {
-        teamValidator.validateTeams(teams);
     }
 
     public boolean canStart(){

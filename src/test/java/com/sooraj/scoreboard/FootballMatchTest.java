@@ -2,6 +2,7 @@ package com.sooraj.scoreboard;
 
 import com.sooraj.scoreboard.domain.Match;
 import com.sooraj.scoreboard.domain.Team;
+import com.sooraj.scoreboard.exception.MatchStateException;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
@@ -35,13 +36,10 @@ class FootballMatchTest {
 
     @Test
     void shouldRegisterTwoFootballTeamsForMatch(){
-        Team homeTeam = new FootballTeam("Mexico");
-        Team awayTeam = new FootballTeam("Canada");
-
-        footballMatch.register(List.of(homeTeam, awayTeam));
+        List<Team>teams = registerTwoTeamForMatch();
 
         assertThat("The registered teams should match the expected list",
-                footballMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
+                footballMatch.getTeams(), equalTo(teams));
         assertTrue(footballMatch.canStart(),
                 "The match should be ready to start after registering two teams");
     }
@@ -59,6 +57,14 @@ class FootballMatchTest {
                 "Expected IllegalStateException when starting without registering 2 teams");
     }
 
+    @Test
+    void shouldThrowExceptionWhenStartingMatchAgainWhichIsInProgress() {
+        registerTwoTeamForMatch();
+        footballMatch.start();
+        assertThrows(MatchStateException.class, () -> footballMatch.start(),
+                "Expected IllegalStateException when starting match which is already in progress");
+    }
+
     static Stream<List<Team>> invalidTeamCombinations(){
         return Stream.of(
                 List.of(),
@@ -67,5 +73,13 @@ class FootballMatchTest {
                         new FootballTeam("Canada"),
                         new FootballTeam("France"))
         );
+    }
+
+    private List<Team> registerTwoTeamForMatch(){
+        Team homeTeam = new FootballTeam("Mexico");
+        Team awayTeam = new FootballTeam("Canada");
+        List<Team> teams = List.of(homeTeam, awayTeam);
+        footballMatch.register(teams);
+        return teams;
     }
 }

@@ -1,4 +1,4 @@
-package com.sooraj.scoreboard;
+package com.sooraj.scoreboard.util;
 
 import com.sooraj.scoreboard.domain.Match;
 

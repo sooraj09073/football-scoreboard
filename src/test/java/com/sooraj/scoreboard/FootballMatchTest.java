@@ -39,7 +39,7 @@ class FootballMatchTest {
 
         assertThat("The registered teams should match the expected list",
                 footballMatch.getTeams(), equalTo(List.of(homeTeam, awayTeam)));
-        assertTrue(footballMatch.isReadyToStart(),
+        assertTrue(footballMatch.canStart(),
                 "The match should be ready to start after registering two teams");
     }
 

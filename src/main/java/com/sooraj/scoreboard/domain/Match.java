@@ -1,38 +1,29 @@
 package com.sooraj.scoreboard.domain;
 
-import com.sooraj.scoreboard.service.ScoreBoard;
-import com.sooraj.scoreboard.service.Scoring;
 import com.sooraj.scoreboard.service.TeamRegistration;
+import com.sooraj.scoreboard.validator.MatchRegulator;
 import com.sooraj.scoreboard.validator.TeamValidator;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Collections.*;
 
 public abstract class Match {
     private List<Team> teams;
-    private final ScoreBoard scoreBoard;
     private final TeamValidator teamValidator;
     private final TeamRegistration teamRegistration;
-    private final Scoring scoring;
+    private final MatchRegulator matchRegulator;
     private int homeScore = -1;
     private int awayScore = -1;
+    private boolean hasStarted = false;
 
-    protected Match(ScoreBoard scoreBoard, TeamValidator teamValidator,
-                    TeamRegistration teamRegistration, Scoring scoring) {
-        this.scoreBoard = scoreBoard;
+    protected Match(TeamValidator teamValidator,
+                    TeamRegistration teamRegistration, MatchRegulator matchRegulator) {
         this.teamValidator = teamValidator;
         this.teamRegistration = teamRegistration;
-        this.scoring = scoring;
-    }
-
-    public void start() {
-        if (!isReadyToStart()) {
-            throw new IllegalStateException("Cannot start the match: Teams registration is not complete.");
-        }
-        homeScore = 0;
-        awayScore = 0;
-        scoreBoard.addMatch(this);
+        this.matchRegulator = matchRegulator;
     }
 
     public int getHomeScore() {
@@ -55,16 +46,30 @@ public abstract class Match {
         this.awayScore = awayScore;
     }
 
-    public void updateScore(int homeScore, int awayScore) {
-        scoring.updateScore(this, homeScore, awayScore);
+    public void hasStarted(boolean hasStarted) {
+        this.hasStarted = hasStarted;
     }
 
-    public void finish() {
-        scoreBoard.removeMatch(this);
+    public boolean hasStarted() {
+        return hasStarted;
     }
 
     public List<Team> getTeams() {
-        return unmodifiableList(teams);
+        return Optional.ofNullable(teams)
+                .map(Collections::unmodifiableList)
+                .orElse(emptyList());
+    }
+
+    public void start() {
+        matchRegulator.start(this);
+    }
+
+    public void updateScore(int homeScore, int awayScore) {
+        matchRegulator.updateScore(this, homeScore, awayScore);
+    }
+
+    public void finish() {
+        matchRegulator.finish(this);
     }
 
     public final void register(List<Team> teams) {
@@ -75,7 +80,7 @@ public abstract class Match {
         teamValidator.validateTeams(teams);
     }
 
-    public boolean isReadyToStart() {
-        return teams != null && teams.size() == 2;
+    public boolean canStart(){
+        return matchRegulator.canStart(this);
     }
 }

@@ -39,6 +39,7 @@ class ScoreboardTest {
 
         // After match starts, scores should be initialized to zero
         match.start();
+        assertThat("Match Started", match.hasStarted());
         assertThat("Home score should be initialized to 0 when match starts",
                 match.getHomeScore(), equalTo(0));
         assertThat("Away score should be initialized to 0 when match starts",

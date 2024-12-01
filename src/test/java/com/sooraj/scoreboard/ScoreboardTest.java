@@ -110,11 +110,11 @@ class ScoreboardTest {
         String summary = scoreBoard.getSummary();
 
         assertThat(summary, equalTo("""
-                1. Uruguay 6 - Italy 6
-                2. Spain 10 - Brazil 2
-                3. Mexico 0 - Canada 5
-                4. Argentina 3 - Australia 1
-                5. Germany 2 - France 2
+                Uruguay 6 - Italy 6
+                Spain 10 - Brazil 2
+                Mexico 0 - Canada 5
+                Argentina 3 - Australia 1
+                Germany 2 - France 2
                 """
                 ));
     }

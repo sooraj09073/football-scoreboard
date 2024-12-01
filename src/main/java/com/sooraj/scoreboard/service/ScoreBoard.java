@@ -7,7 +7,6 @@ import com.sooraj.scoreboard.util.MatchScoreComparator;
 import com.sooraj.scoreboard.util.MatchSummaryFormatter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -19,10 +18,6 @@ public abstract class ScoreBoard {
 
     public void addMatch(Match matchList) {
         this.matchList.add(matchList);
-    }
-
-    public List<Match> getMatchList() {
-        return Collections.unmodifiableList(matchList);
     }
 
     public boolean isMatchLive(String... teams) {

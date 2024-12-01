@@ -1,6 +1,7 @@
 package com.sooraj.scoreboard;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.exception.LiveMatchNotFoundException;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
@@ -74,6 +75,12 @@ class ScoreboardTest {
     void shouldShowLiveMatchInScoreboard(){
         match.start();
         assertThat("Expected live match to be displayed in the scoreboard", scoreBoard.isMatchLive("Mexico", "Canada"));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenLiveMatchCaannotFindInScoreboard(){
+        assertThrows(LiveMatchNotFoundException.class, () -> scoreBoard.findLiveMatch("NoTeam"),
+                "Expected IllegalStateException when starting without registering 2 teams");
     }
 
     @Test

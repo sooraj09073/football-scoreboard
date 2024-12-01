@@ -13,7 +13,7 @@ public class TwoTeamMatchManager extends MatchManager{
     @Override
     public boolean canStart(Match match) {
         if(match.getTeams() != null && match.getTeams().size() != 2){
-            throw new IllegalStateException("Cannot start the match: Teams registration is not complete.");
+            throw new MatchStateException("Cannot start the match: Teams registration is not complete.");
         } else if(match.hasStarted()){
             throw new MatchStateException("Cannot start the match: Match has already started.");
         }

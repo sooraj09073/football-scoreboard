@@ -53,8 +53,8 @@ class FootballMatchTest {
 
     @Test
     void shouldThrowExceptionWhenStartingMatchWithoutTeams() {
-        assertThrows(IllegalStateException.class, () -> footballMatch.start(),
-                "Expected IllegalStateException when starting without registering 2 teams");
+        assertThrows(MatchStateException.class, () -> footballMatch.start(),
+                "Expected MatchStateException when starting without registering 2 teams");
     }
 
     @Test
@@ -62,7 +62,7 @@ class FootballMatchTest {
         registerTwoTeamForMatch();
         footballMatch.start();
         assertThrows(MatchStateException.class, () -> footballMatch.start(),
-                "Expected IllegalStateException when starting match which is already in progress");
+                "Expected MatchStateException when starting match which is already in progress");
     }
 
     static Stream<List<Team>> invalidTeamCombinations(){

@@ -4,6 +4,7 @@ import com.sooraj.scoreboard.domain.Match;
 import com.sooraj.scoreboard.ScoreBoard;
 import com.sooraj.scoreboard.ScoreManager;
 import com.sooraj.scoreboard.TeamRegistration;
+import com.sooraj.scoreboard.validator.FootballTeamValidator;
 
 public class FootballMatch extends Match {
     public FootballMatch(ScoreBoard scoreBoard) {

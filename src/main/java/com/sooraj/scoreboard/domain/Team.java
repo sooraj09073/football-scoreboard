@@ -1,4 +1,4 @@
-package com.sooraj.scoreboard;
+package com.sooraj.scoreboard.domain;
 
 public abstract class Team {
     private final String name;

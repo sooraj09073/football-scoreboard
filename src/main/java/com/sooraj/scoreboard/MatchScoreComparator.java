@@ -1,5 +1,7 @@
 package com.sooraj.scoreboard;
 
+import com.sooraj.scoreboard.domain.Match;
+
 import java.util.Comparator;
 import java.util.List;
 

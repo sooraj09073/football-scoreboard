@@ -1,6 +1,6 @@
 package com.sooraj.scoreboard.football;
 
-import com.sooraj.scoreboard.Match;
+import com.sooraj.scoreboard.domain.Match;
 import com.sooraj.scoreboard.ScoreBoard;
 import com.sooraj.scoreboard.ScoreManager;
 import com.sooraj.scoreboard.TeamRegistration;

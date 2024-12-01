@@ -1,6 +1,6 @@
 package com.sooraj.scoreboard.football;
 
-import com.sooraj.scoreboard.Team;
+import com.sooraj.scoreboard.domain.Team;
 import com.sooraj.scoreboard.TeamValidator;
 
 import java.util.List;

@@ -1,6 +1,4 @@
-package com.sooraj.scoreboard.football;
-
-import com.sooraj.scoreboard.Team;
+package com.sooraj.scoreboard.domain;
 
 public class FootballTeam extends Team {
     public FootballTeam(String teamName) {

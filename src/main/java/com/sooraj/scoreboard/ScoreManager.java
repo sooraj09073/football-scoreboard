@@ -1,5 +1,7 @@
 package com.sooraj.scoreboard;
 
+import com.sooraj.scoreboard.domain.Match;
+
 public class ScoreManager implements Scoring {
     public void updateScore(Match match, int homeScore, int awayScore) {
         if(homeScore<0 || awayScore<0) {

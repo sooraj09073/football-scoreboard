@@ -1,4 +1,9 @@
-package com.sooraj.scoreboard;
+package com.sooraj.scoreboard.domain;
+
+import com.sooraj.scoreboard.ScoreBoard;
+import com.sooraj.scoreboard.Scoring;
+import com.sooraj.scoreboard.TeamRegistration;
+import com.sooraj.scoreboard.TeamValidator;
 
 import java.util.List;
 
@@ -66,11 +71,11 @@ public abstract class Match {
         teamRegistration.register(this, teams);
     }
 
-    protected void validateTeams(List<Team> teams) {
+    public void validateTeams(List<Team> teams) {
         teamValidator.validateTeams(teams);
     }
 
-    protected boolean isReadyToStart() {
+    public boolean isReadyToStart() {
         return teams != null && teams.size() == 2;
     }
 }

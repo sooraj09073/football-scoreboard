@@ -4,7 +4,9 @@ import com.sooraj.scoreboard.domain.Match;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
+import com.sooraj.scoreboard.service.FootballTeamRegistration;
 import com.sooraj.scoreboard.service.ScoreBoard;
+import com.sooraj.scoreboard.validator.FootballMatchManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +21,18 @@ class ScoreboardTest {
 
     Match match;
     ScoreBoard scoreBoard;
+    FootballTeamRegistration footballTeamRegistration;
+    FootballMatchManager footballMatchManager;
 
     @BeforeEach
     void setUp() {
         FootballTeam teamA = new FootballTeam("Mexico");
         FootballTeam teamB = new FootballTeam("Canada");
         scoreBoard = new FootballScoreBoard();
-        match = new FootballMatch(scoreBoard);
+        footballTeamRegistration = new FootballTeamRegistration();
+        footballMatchManager = new FootballMatchManager(scoreBoard);
+
+        match = new FootballMatch(footballTeamRegistration, footballMatchManager);
         match.register(List.of(teamA, teamB));
     }
 
@@ -84,28 +91,28 @@ class ScoreboardTest {
 
         FootballTeam spain = new FootballTeam("Spain");
         FootballTeam brazil = new FootballTeam("Brazil");
-        Match match2 = new FootballMatch(scoreBoard);
+        Match match2 = new FootballMatch(footballTeamRegistration,footballMatchManager);
         match2.register(List.of(spain, brazil));
         match2.start();
         match2.updateScore(10,2);
 
         FootballTeam germany = new FootballTeam("Germany");
         FootballTeam france = new FootballTeam("France");
-        Match match3 = new FootballMatch(scoreBoard);
+        Match match3 = new FootballMatch(footballTeamRegistration,footballMatchManager);
         match3.register(List.of(germany, france));
         match3.start();
         match3.updateScore(2,2);
 
         FootballTeam uruguay = new FootballTeam("Uruguay");
         FootballTeam italy = new FootballTeam("Italy");
-        Match match4 = new FootballMatch(scoreBoard);
+        Match match4 = new FootballMatch(footballTeamRegistration,footballMatchManager);
         match4.register(List.of(uruguay, italy));
         match4.start();
         match4.updateScore(6,6);
 
         FootballTeam argentina = new FootballTeam("Argentina");
         FootballTeam australia = new FootballTeam("Australia");
-        Match match5 = new FootballMatch(scoreBoard);
+        Match match5 = new FootballMatch(footballTeamRegistration,footballMatchManager);
         match5.register(List.of(argentina, australia));
         match5.start();
         match5.updateScore(3,1);

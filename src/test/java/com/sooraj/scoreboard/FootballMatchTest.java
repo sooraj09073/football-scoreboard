@@ -5,7 +5,9 @@ import com.sooraj.scoreboard.domain.Team;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
 import com.sooraj.scoreboard.football.FootballTeam;
+import com.sooraj.scoreboard.service.FootballTeamRegistration;
 import com.sooraj.scoreboard.service.ScoreBoard;
+import com.sooraj.scoreboard.validator.FootballMatchManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,13 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FootballMatchTest {
 
-    private ScoreBoard footballScoreBoard;
     private Match footballMatch;
 
     @BeforeEach
     void setUp() {
-        footballScoreBoard = new FootballScoreBoard();
-        footballMatch = new FootballMatch(footballScoreBoard);
+        ScoreBoard footballScoreBoard = new FootballScoreBoard();
+        FootballTeamRegistration teamRegistration = new FootballTeamRegistration();
+        FootballMatchManager footballMatchManager = new FootballMatchManager(footballScoreBoard);
+        footballMatch = new FootballMatch(teamRegistration, footballMatchManager);
     }
 
     @Test

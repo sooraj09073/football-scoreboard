@@ -13,21 +13,21 @@ public abstract class Match {
     private List<Team> teams;
     private final TeamRegistration teamRegistration;
     private final MatchRegulator matchRegulator;
-    private int homeScore = -1;
-    private int awayScore = -1;
+    private final ScoreUpdater scoreUpdater;
     private boolean hasStarted = false;
 
-    protected Match(TeamRegistration teamRegistration, MatchRegulator matchRegulator) {
+    protected Match(TeamRegistration teamRegistration, MatchRegulator matchRegulator, ScoreUpdater scoreUpdater) {
         this.teamRegistration = teamRegistration;
         this.matchRegulator = matchRegulator;
+        this.scoreUpdater = scoreUpdater;
     }
 
     public int getHomeScore() {
-        return homeScore;
+        return scoreUpdater.getHomeScore();
     }
 
     public int getAwayScore() {
-        return awayScore;
+        return scoreUpdater.getAwayScore();
     }
 
     public void setTeams(List<Team> teams) {
@@ -35,11 +35,11 @@ public abstract class Match {
     }
 
     public void setHomeScore(int homeScore) {
-        this.homeScore = homeScore;
+        scoreUpdater.setHomeScore(homeScore);
     }
 
     public void setAwayScore(int awayScore) {
-        this.awayScore = awayScore;
+        scoreUpdater.setAwayScore(awayScore);
     }
 
     public void hasStarted(boolean hasStarted) {

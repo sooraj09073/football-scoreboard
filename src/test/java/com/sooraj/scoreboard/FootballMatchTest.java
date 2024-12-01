@@ -1,6 +1,8 @@
 package com.sooraj.scoreboard;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.domain.MatchScore;
+import com.sooraj.scoreboard.domain.ScoreUpdater;
 import com.sooraj.scoreboard.domain.Team;
 import com.sooraj.scoreboard.exception.MatchStateException;
 import com.sooraj.scoreboard.football.FootballMatch;
@@ -31,7 +33,8 @@ class FootballMatchTest {
         ScoreBoard footballScoreBoard = new FootballScoreBoard();
         FootballTeamRegistration teamRegistration = new FootballTeamRegistration();
         FootballMatchManager footballMatchManager = new FootballMatchManager(footballScoreBoard);
-        footballMatch = new FootballMatch(teamRegistration, footballMatchManager);
+        ScoreUpdater scoreUpdater = new MatchScore();
+        footballMatch = new FootballMatch(teamRegistration, footballMatchManager, scoreUpdater);
     }
 
     @Test

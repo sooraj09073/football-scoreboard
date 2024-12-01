@@ -1,6 +1,8 @@
 package com.sooraj.scoreboard;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.domain.MatchScore;
+import com.sooraj.scoreboard.domain.ScoreUpdater;
 import com.sooraj.scoreboard.exception.LiveMatchNotFoundException;
 import com.sooraj.scoreboard.football.FootballMatch;
 import com.sooraj.scoreboard.football.FootballScoreBoard;
@@ -32,8 +34,8 @@ class ScoreboardTest {
         scoreBoard = new FootballScoreBoard();
         footballTeamRegistration = new FootballTeamRegistration();
         footballMatchManager = new FootballMatchManager(scoreBoard);
-
-        match = new FootballMatch(footballTeamRegistration, footballMatchManager);
+        ScoreUpdater scoreUpdater = new MatchScore();
+        match = new FootballMatch(footballTeamRegistration, footballMatchManager,scoreUpdater);
         match.register(List.of(teamA, teamB));
     }
 
@@ -98,28 +100,32 @@ class ScoreboardTest {
 
         FootballTeam spain = new FootballTeam("Spain");
         FootballTeam brazil = new FootballTeam("Brazil");
-        Match match2 = new FootballMatch(footballTeamRegistration,footballMatchManager);
+        ScoreUpdater scoreUpdater2 = new MatchScore();
+        Match match2 = new FootballMatch(footballTeamRegistration,footballMatchManager,scoreUpdater2);
         match2.register(List.of(spain, brazil));
         match2.start();
         match2.updateScore(10,2);
 
         FootballTeam germany = new FootballTeam("Germany");
         FootballTeam france = new FootballTeam("France");
-        Match match3 = new FootballMatch(footballTeamRegistration,footballMatchManager);
+        ScoreUpdater scoreUpdater3 = new MatchScore();
+        Match match3 = new FootballMatch(footballTeamRegistration,footballMatchManager,scoreUpdater3);
         match3.register(List.of(germany, france));
         match3.start();
         match3.updateScore(2,2);
 
         FootballTeam uruguay = new FootballTeam("Uruguay");
         FootballTeam italy = new FootballTeam("Italy");
-        Match match4 = new FootballMatch(footballTeamRegistration,footballMatchManager);
+        ScoreUpdater scoreUpdater4 = new MatchScore();
+        Match match4 = new FootballMatch(footballTeamRegistration,footballMatchManager,scoreUpdater4);
         match4.register(List.of(uruguay, italy));
         match4.start();
         match4.updateScore(6,6);
 
         FootballTeam argentina = new FootballTeam("Argentina");
         FootballTeam australia = new FootballTeam("Australia");
-        Match match5 = new FootballMatch(footballTeamRegistration,footballMatchManager);
+        ScoreUpdater scoreUpdater5 = new MatchScore();
+        Match match5 = new FootballMatch(footballTeamRegistration,footballMatchManager,scoreUpdater5);
         match5.register(List.of(argentina, australia));
         match5.start();
         match5.updateScore(3,1);

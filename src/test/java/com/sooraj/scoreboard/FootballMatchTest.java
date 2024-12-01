@@ -27,14 +27,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FootballMatchTest {
 
     private Match footballMatch;
+    private FootballTeamRegistration teamRegistration;
 
     @BeforeEach
     void setUp() {
-        ScoreBoard footballScoreBoard = new FootballScoreBoard();
-        FootballTeamRegistration teamRegistration = new FootballTeamRegistration();
-        FootballMatchManager footballMatchManager = new FootballMatchManager(footballScoreBoard);
         ScoreUpdater scoreUpdater = new MatchScore();
-        footballMatch = new FootballMatch(teamRegistration, footballMatchManager, scoreUpdater);
+        ScoreBoard footballScoreBoard = new FootballScoreBoard();
+        teamRegistration = new FootballTeamRegistration();
+        FootballMatchManager footballMatchManager = new FootballMatchManager(footballScoreBoard,scoreUpdater);
+        footballMatch = new FootballMatch(teamRegistration, footballMatchManager);
     }
 
     @Test
@@ -42,7 +43,7 @@ class FootballMatchTest {
         List<Team>teams = registerTwoTeamForMatch();
 
         assertThat("The registered teams should match the expected list",
-                footballMatch.getTeams(), equalTo(teams));
+                teamRegistration.getTeams(), equalTo(teams));
         assertTrue(footballMatch.canStart(),
                 "The match should be ready to start after registering two teams");
     }
@@ -50,7 +51,7 @@ class FootballMatchTest {
     @ParameterizedTest
     @MethodSource(value = "invalidTeamCombinations")
     void shouldNotRegisterInvalidFootballTeamsForMatch(List<Team> teams) {
-        assertThrows(IllegalArgumentException.class, () -> footballMatch.register(teams),
+        assertThrows(IllegalArgumentException.class, () -> teamRegistration.register(teams),
                 "Expected IllegalArgumentException when registering more than two teams");
     }
 
@@ -90,7 +91,7 @@ class FootballMatchTest {
         Team homeTeam = new FootballTeam("Mexico");
         Team awayTeam = new FootballTeam("Canada");
         List<Team> teams = List.of(homeTeam, awayTeam);
-        footballMatch.register(teams);
+        teamRegistration.register(teams);
         return teams;
     }
 }

@@ -2,7 +2,7 @@ package com.sooraj.scoreboard.domain;
 
 public abstract class Team {
     private final String name;
-    private boolean isReady;
+    private boolean isReady=true;
     protected Team(String teamName) {
         this.name = teamName;
     }

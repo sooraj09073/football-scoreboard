@@ -1,6 +1,7 @@
 package com.sooraj.scoreboard.validator;
 
 import com.sooraj.scoreboard.domain.Match;
+import com.sooraj.scoreboard.exception.MatchStateException;
 import com.sooraj.scoreboard.service.ScoreBoard;
 
 public abstract class MatchManager implements MatchRegulator {
@@ -13,7 +14,7 @@ public abstract class MatchManager implements MatchRegulator {
     @Override
     public void start(Match match) {
         if(!canStart(match)){
-            throw new IllegalStateException("Match cannot be started");
+            throw new MatchStateException("Match cannot be started");
         }
         match.setHomeScore(0);
         match.setAwayScore(0);

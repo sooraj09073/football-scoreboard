@@ -2,10 +2,9 @@
 A simple football scoreboard library developed in Java. This library tracks and display scores for football matches. 
 
 ## Features
-**Note:** this is not actually implemented yet ;-).
 1. Add new football matches with participating team
 2. Update the scoreboard of ongoing matches.
-3. View the scoreboard with all matchers and their scores.
+3. View the scoreboard with all live matchers and their scores.
 
 ## Prerequisites
 1. **Java**: Version 8 or higher installed
